@@ -10,7 +10,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ui.fxml"));
+        loader.setControllerFactory(t -> new Controller(new Model())); // we do this to pass the Model we created
+        primaryStage.setTitle("TextEditor JavaFX");
+        primaryStage.setScene(new Scene(loader.load()));
         primaryStage.show();
     }
 
