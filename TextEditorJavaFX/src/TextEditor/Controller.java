@@ -27,6 +27,23 @@ public class Controller {
        TextFile textFile = new TextFile(currentTextFile.loadFile(), Arrays.asList(textArea.getText().split("\n")));
        model.save(textFile);
     }
+	    @FXML
+    private void onSaveAs(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save File as");
+        fileChooser.setInitialDirectory(new File("./"));  // ./ - means the Directory where the program started
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+        File file =  fileChooser.showSaveDialog(null);
+        if(file!=null){
+            try (PrintStream ps = new PrintStream(file)) {
+                   ps.print(textArea.getText());
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     @FXML
     private void onLoad(){
 		FileChooser fileChooser = new FileChooser();
@@ -42,7 +59,10 @@ public class Controller {
                 currentTextFile.getContentFromFile().forEach(line ->textArea.appendText(line + "\n"));
             }
             else{
-               System.out.println("Loading failed. File cannot be rendered.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("Wrong file chosen. Loading failed.");
+                alert.show();
             }
         }
     }
@@ -52,10 +72,10 @@ public class Controller {
     }
     @FXML
     private void onAbout(){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Text Editor JavaFX");
         alert.setTitle("About");
-        alert.setContentText("TextEditor version 1.0 developed with Java.\nPowered by Java 8");
+        alert.setContentText("TextEditor version 1.1\nVersion Release: 17.01.2017\nDevelopment platform: Java\nPowered by Java 8");
         alert.show();
     }
 }

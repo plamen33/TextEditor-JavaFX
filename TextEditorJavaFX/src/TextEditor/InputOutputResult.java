@@ -1,8 +1,5 @@
 package TextEditor;
 
-/**
- * Created by Soft on 17/01/2017.
- */
 public class InputOutputResult<TextData> {
     private TextData data;
     private boolean check;

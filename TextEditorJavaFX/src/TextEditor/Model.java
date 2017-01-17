@@ -6,8 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
-import javafx.scene.control.TextArea;
-import javafx.scene.text.Text;
 
 public class Model {
       
@@ -15,7 +13,7 @@ public class Model {
         try {
             Files.write(textFile.loadFile(), textFile.getContentFromFile(), StandardOpenOption.CREATE);
         }
-        catch(IOException e){    // We have to do this as there is a non-catched exception - IOException
+        catch(IOException e){    // We have to do this, as there is a non-catched exception - IOException
              e.printStackTrace();
         }
     }
@@ -27,7 +25,7 @@ public class Model {
         }
         catch(IOException e){
             e.printStackTrace();
-            return new InputOutputResult<>(false, null); // not
+            return new InputOutputResult<>(false, null); // not successful result
         }
     }
      public void close(){
